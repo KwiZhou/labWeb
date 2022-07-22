@@ -1,6 +1,6 @@
 import cloudbase from '@cloudbase/js-sdk';
 const app = cloudbase.init({
-    env: "fuildroom-4gh9p27od95e1876",
+   
 });
 const db = app.database();
 const _ = db.command;
