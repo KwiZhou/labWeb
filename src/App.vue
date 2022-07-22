@@ -1,28 +1,49 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div style="position: sticky; top: 0px; z-index: 22">
+      <top />
+    </div>
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
+    <TencentMap  v-show="this.$route.meta.mapShow===true"/>
+    <bottom />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import top from "@/components/top/top.vue";
+import TencentMap from "@/components/TencentMap";
+import bottom from "@/components/bottom/bottom.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    top,
+    bottom,
+    TencentMap
+  },
+  data() {
+    return {};
+  },
+  mounted() {
+   
+    window.onresize = () => {
+      this.screenWidth = document.body.clientWidth;
+    };
+  },
+};
 </script>
 
 <style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0.1;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  line-height: 1.8em;
 }
 </style>
